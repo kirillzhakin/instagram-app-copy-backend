@@ -26,8 +26,14 @@ const db = getFirestore();
 const bucket = getStorage().bucket();
 
 const { PORT } = process.env;
-const { WEB_PUSH_PUBLIC_KEY } = process.env;
-const { WEB_PUSH_PRIVATE_KEY } = process.env;
+
+const WEB_PUSH_PUBLIC_KEY =
+  BG01MtyPGvDl5NFWAFhhBigyG0VOb6x78I1KwiC0q2b30xd4MFpJQzhYxq5fSSGkfosq74iM -
+  kcLkj36xoEHzpE;
+const WEB_PUSH_PRIVATE_KEY = F4ouwm0dIsx2_Yi4Ry8XDrcaEaJT7U0Ra0kqyoVtoXU;
+
+// const { WEB_PUSH_PUBLIC_KEY } = process.env;
+// const { WEB_PUSH_PRIVATE_KEY } = process.env;
 
 webpush.setGCMAPIKey('<Your GCM API Key Here>');
 webpush.setVapidDetails(
