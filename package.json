@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "web-push": "web-push"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "express": "^4.18.2",
     "firebase-admin": "^11.6.0",
     "nodemon": "^2.0.22",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "web-push": "^3.5.0"
   }
 }

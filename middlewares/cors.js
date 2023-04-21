@@ -1,6 +1,4 @@
-const allowedCors = [
-  // 'localhost:9000',
-];
+const allowedCors = ['localhost:9200'];
 
 const cors = (req, res, next) => {
   const { origin } = req.headers;
