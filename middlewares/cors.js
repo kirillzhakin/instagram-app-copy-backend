@@ -1,4 +1,8 @@
-const allowedCors = ['localhost:9200']
+const allowedCors = [
+	'http://chromium-d89a6.web.app',
+	'https://chromium-d89a6.web.app',
+	'localhost:9200'
+]
 
 const cors = (req, res, next) => {
 	const { origin } = req.headers

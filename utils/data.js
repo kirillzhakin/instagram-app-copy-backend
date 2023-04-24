@@ -1,0 +1,15 @@
+const {
+	PORT = 3000,
+	NODE_ENV,
+	JWT_TOKEN,
+	WEB_PUSH_PUBLIC_KEY,
+	WEB_PUSH_PRIVATE_KEY
+} = process.env
+
+module.exports = {
+	PORT,
+	NODE_ENV,
+	JWT_TOKEN,
+	WEB_PUSH_PUBLIC_KEY,
+	WEB_PUSH_PRIVATE_KEY
+}
