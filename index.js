@@ -56,6 +56,7 @@ app.post('/createPost', (req, res) => {
 	let uuid = uuidv4()
 	let fields = {}
 	let fileData = {}
+	let imageUrl
 
 	bb.on('file', (name, file, info) => {
 		const { filename, encoding, mimeType } = info
@@ -71,7 +72,7 @@ app.post('/createPost', (req, res) => {
 		fileData = { filepath, mimeType }
 	})
 
-	bb.on('field', (name, val, info) => {
+	bb.on('field', (name, val, _info) => {
 		fields[name] = val
 	})
 
@@ -95,6 +96,8 @@ app.post('/createPost', (req, res) => {
 		)
 
 		const createPost = uploadedFile => {
+			imageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
+
 			db.collection('posts')
 				.doc(fields.id)
 				.set({
@@ -102,7 +105,7 @@ app.post('/createPost', (req, res) => {
 					caption: fields.caption,
 					location: fields.location,
 					date: parseInt(fields.date),
-					imageUrl: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
+					imageUrl: imageUrl
 				})
 				.then(() => {
 					sendPushNotification()
@@ -132,7 +135,8 @@ app.post('/createPost', (req, res) => {
 						const pushContent = {
 							title: 'New Instsgram Post!',
 							body: 'New Post Added! Check it out!',
-							openUrl: '/'
+							openUrl: '/#/',
+							imageUrl: imageUrl
 						}
 						const pushContentStringified = JSON.stringify(pushContent)
 						webpush.sendNotification(pushSubscription, pushContentStringified)
