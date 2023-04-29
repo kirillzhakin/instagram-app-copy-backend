@@ -15,7 +15,7 @@ const os = require('os')
 const fs = require('fs')
 
 const app = express()
-// app.use(cors);
+app.use(cors)
 
 initializeApp({
 	credential: cert(serviceAccount),
@@ -37,8 +37,6 @@ webpush.setVapidDetails(
 )
 
 app.get('/posts', (_req, res) => {
-	res.set('Access-Control-Allow-Origin', '*')
-
 	const posts = []
 
 	db.collection('posts')
@@ -51,7 +49,6 @@ app.get('/posts', (_req, res) => {
 })
 
 app.post('/createPost', (req, res) => {
-	res.set('Access-Control-Allow-Origin', '*')
 	const bb = busboy({ headers: req.headers })
 	let uuid = uuidv4()
 	let fields = {}
@@ -149,7 +146,6 @@ app.post('/createPost', (req, res) => {
 })
 
 app.post('/createSubscription', (req, res) => {
-	res.set('Access-Control-Allow-Origin', '*')
 	db.collection('subscriptions')
 		.add(req.query)
 		.then(data => {
