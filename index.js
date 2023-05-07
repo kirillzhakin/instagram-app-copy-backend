@@ -15,7 +15,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors)
 
-app.use('/', authRouter)
+// app.use('/', authRouter)
 
 // app.use(usersRouter)
 app.use(postsRouter)
