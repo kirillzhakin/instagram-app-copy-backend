@@ -1,9 +1,8 @@
 require('dotenv').config()
 const express = require('express')
-const bodyParser = require('body-parser')
-const { PORT } = require('./utils/data')
-
 const cors = require('./middlewares/cors')
+const bodyParser = require('body-parser')
+const PORT = process.env.PORT
 
 const authRouter = require('./routes/auth')
 const usersRouter = require('./routes/users')

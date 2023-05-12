@@ -7,12 +7,10 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs')
 
-const { WEB_PUSH_PUBLIC_KEY, WEB_PUSH_PRIVATE_KEY } = require('../utils/data')
-
 webpush.setVapidDetails(
 	'mailto:example@yourdomain.org',
-	WEB_PUSH_PUBLIC_KEY,
-	WEB_PUSH_PRIVATE_KEY
+	process.env.WEB_PUSH_PUBLIC_KEY,
+	process.env.WEB_PUSH_PRIVATE_KEY
 )
 
 const postsController = (_req, res) => {
