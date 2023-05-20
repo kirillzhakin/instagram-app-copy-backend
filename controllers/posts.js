@@ -6,6 +6,7 @@ const busboy = require('busboy')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
+const { query } = require('express')
 
 webpush.setVapidDetails(
 	'mailto:example@yourdomain.org',
@@ -13,14 +14,27 @@ webpush.setVapidDetails(
 	process.env.WEB_PUSH_PRIVATE_KEY
 )
 
-const postsController = (_req, res) => {
+const postsController = (req, res) => {
+	const userId = req.query.userId
 	const posts = []
 	db.collection('posts')
 		.orderBy('date', 'desc')
 		.get()
 		.then(snapshot => {
 			snapshot.forEach(doc => posts.push(doc.data()))
-			res.send(posts)
+			const postsUser = posts.filter(v => v.userId === userId)
+			res.send(postsUser)
+		})
+}
+
+const deletePost = (req, res) => {
+	const id = req.query.id
+	console.log(id)
+	db.collection('posts')
+		.doc(id)
+		.delete()
+		.then(() => {
+			res.send(`Post deleted: ${id}`)
 		})
 }
 
@@ -62,6 +76,7 @@ const createPost = (req, res) => {
 				}
 			},
 			(err, uploadedFile) => {
+				console.log(uploadedFile)
 				if (!err) {
 					addPost(uploadedFile)
 				}
@@ -78,7 +93,8 @@ const createPost = (req, res) => {
 					caption: fields.caption,
 					location: fields.location,
 					date: parseInt(fields.date),
-					imageUrl: imageUrl
+					imageUrl: imageUrl,
+					userId: fields.userId
 				})
 				.then(() => {
 					sendPushNotification()
@@ -121,4 +137,4 @@ const createPost = (req, res) => {
 	req.pipe(bb)
 }
 
-module.exports = { postsController, createPost }
+module.exports = { postsController, deletePost, createPost }
