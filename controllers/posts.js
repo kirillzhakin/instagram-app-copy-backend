@@ -6,7 +6,6 @@ const busboy = require('busboy')
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
-const { query } = require('express')
 
 webpush.setVapidDetails(
 	'mailto:example@yourdomain.org',
@@ -25,17 +24,54 @@ const postsController = (req, res) => {
 			const postsUser = posts.filter(v => v.userId === userId)
 			res.send(postsUser)
 		})
+		.catch(err => res.send(err))
+}
+
+const sendPushNotification = (title, body, imageUrl) => {
+	let subscriptions = []
+	db.collection('subscriptions')
+		.get()
+		.then(data => {
+			data.forEach(doc => {
+				subscriptions.push(doc.data())
+			})
+			return subscriptions
+		})
+		.then(subscriptions => {
+			subscriptions.forEach(sub => {
+				const pushSubscription = {
+					endpoint: sub.endpoint,
+					keys: {
+						auth: sub.keys.auth,
+						p256dh: sub.keys.p256dh
+					}
+				}
+				const pushContent = {
+					title,
+					body,
+					openUrl: '/#/',
+					imageUrl: imageUrl || ''
+				}
+				const pushContentStringified = JSON.stringify(pushContent)
+				webpush.sendNotification(pushSubscription, pushContentStringified)
+			})
+		})
+		.catch(err => res.send(err))
 }
 
 const deletePost = (req, res) => {
+	const title = 'Instsgram:'
+	const body = 'Post Deleted! Check it out!'
 	const id = req.query.id
 	console.log(id)
 	db.collection('posts')
 		.doc(id)
 		.delete()
 		.then(() => {
+			sendPushNotification(title, body)
 			res.send(`Post deleted: ${id}`)
 		})
+		.catch(err => res.send(err))
 }
 
 const createPost = (req, res) => {
@@ -43,6 +79,8 @@ const createPost = (req, res) => {
 	let uuid = uuidv4()
 	let fields = {}
 	let fileData = {}
+	let title
+	let body
 	let imageUrl
 
 	bb.on('file', (name, file, info) => {
@@ -76,7 +114,6 @@ const createPost = (req, res) => {
 				}
 			},
 			(err, uploadedFile) => {
-				console.log(uploadedFile)
 				if (!err) {
 					addPost(uploadedFile)
 				}
@@ -85,7 +122,8 @@ const createPost = (req, res) => {
 
 		const addPost = uploadedFile => {
 			imageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
-
+			title = 'New Instsgram Post!'
+			body = 'New Post Added! Check it out!'
 			db.collection('posts')
 				.doc(fields.id)
 				.set({
@@ -97,40 +135,10 @@ const createPost = (req, res) => {
 					userId: fields.userId
 				})
 				.then(() => {
-					sendPushNotification()
+					sendPushNotification(title, body, imageUrl)
 					res.send(`Post added: ${fields.id}`)
 				})
-		}
-
-		const sendPushNotification = () => {
-			let subscriptions = []
-			db.collection('subscriptions')
-				.get()
-				.then(data => {
-					data.forEach(doc => {
-						subscriptions.push(doc.data())
-					})
-					return subscriptions
-				})
-				.then(subscriptions => {
-					subscriptions.forEach(sub => {
-						const pushSubscription = {
-							endpoint: sub.endpoint,
-							keys: {
-								auth: sub.keys.auth,
-								p256dh: sub.keys.p256dh
-							}
-						}
-						const pushContent = {
-							title: 'New Instsgram Post!',
-							body: 'New Post Added! Check it out!',
-							openUrl: '/#/',
-							imageUrl: imageUrl
-						}
-						const pushContentStringified = JSON.stringify(pushContent)
-						webpush.sendNotification(pushSubscription, pushContentStringified)
-					})
-				})
+				.catch(err => res.send(err))
 		}
 	})
 

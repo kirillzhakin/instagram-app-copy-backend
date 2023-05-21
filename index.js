@@ -4,7 +4,6 @@ const cors = require('./middlewares/cors')
 const bodyParser = require('body-parser')
 const PORT = process.env.PORT
 
-const usersRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
 const subscriptionRouter = require('./routes/subscriptions')
 
