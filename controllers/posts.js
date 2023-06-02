@@ -63,7 +63,6 @@ const deletePost = (req, res) => {
 	const title = 'Instsgram:'
 	const body = 'Post Deleted! Check it out!'
 	const id = req.query.id
-	console.log(id)
 	db.collection('posts')
 		.doc(id)
 		.delete()
