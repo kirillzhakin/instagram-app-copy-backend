@@ -4,19 +4,20 @@ const { getStorage } = require('firebase-admin/storage')
 
 initializeApp({
 	credential: cert({
-		type: process.env.FIREBASE_TYPE,
-		project_id: process.env.FIREBASE_PROJECT_ID,
-		private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+		type: 'service_account',
+		project_id: 'chromium-d89a6',
+		private_key_id: '0799132ee1d9b7578935ade87b21ae74e5156e1b',
 		private_key:
-			'-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQDGbVZFHvCa8qVM\n25a2OSWhY3EZiz9imV6SPXKLdFPuT5zBoJPY5DVtHG9IifRdYTTMgNuPs0pA5Xw9\nJ361aR8oeTAqGJmlEO82VYCgBT/JVVw/0fjvXlUjEK9kSD4q/oO7WYSRMJImBYzK\n67EacpezS8U00jb5qKAf6ISOt7N0CpA/BMkapb1sAwwvxrrbGzseGJu3BbQDZ8zH\nif3Atn4C00QZUHlINDfJ+WQ9hlHMDSjSgN2fZbrFi4OwBm4RgNdTmgyr5EkGdREq\nzwVb+C0LskJ63BhFgDDLH2JG7x1qJh/C8CylUhkbjM4pTrSVFVFwZJQVYUrHer6k\nI016VHMFAgMBAAECggEAMbducKYmaeRXB3FTize5Vn0Idvp9OLKtz91miEtuxhyb\nbaZStPrE6iBAP8AVApqa9IxqttAY0DbPkLEHHeQHYwguSbXdNU8PaKE2t6FpEIR7\nNyBgi3Uqxrzk/S7eqL4ZeoUc4pX1YGJumt9AAhzpJorbD/eFv7sA183V/L5JT87u\nrV6pclPDzBY6nEoPP6QVpMFL9nZbtI67YFmsNBLbCBTacgduX2aLlrt3QqmMWwgv\ndLFzrI81ArTtm/ttWsrc/U/tJs+pZKWjKAKXIl3odEqtVo6XedRCWF0ywLIznwTI\nwFviZgN/OfInMN9uty0RSniC0pWaEqDusK++dPuAJwKBgQDs4ExAvv5z+aw7pdMq\nqATbhbqhfUBlQ+p6NBFvQ1zue6vEyG03fNmKQ0T4oz2B5ibSB0vg9+I+hAV+agIV\nthigudrP8GmzUpBaGtCmeWgQ1w3/KvXHBIBFkR3p9+MH4XzFHCuV9vMBBROhE2CO\n38bmwKN8rmUSWf7UlGlDIG/DpwKBgQDWcmH2dubmq0Q+V0HLboEnjveTwSzNDcrq\nlnKpouHrVwtlPDuH2BPABQwlmbHp4sH3lf20tn9qTBw6WBvhlkPGQR4ew56wS34i\nWjcN+uATUOmdPaz90OboyuapIaArzxOS/hBCfsqlyeNV/n8Eu62mgXxFelN+Bt5q\nm/BWz2HZcwKBgBVZpiXT0TV81IRPzveySzXKGOdDVdGKzJCVLtkbdj3ckb/b3NQ6\ngZUPuSC7/eg+aVNW6wTs8sx1s9UQEv4H+rJJ7in93lkWYQJuFk5a9QFHkPBl299D\nTZh3mv2ipSjprwhJILiUmJSH85v6FiLqko/r3xB2249K40gf1FkDjG9TAn97IzMd\nUylDSxTktzYQmmOPU4jWTxZqqIDcM4ej4OPZPyJL/0ovtuOgX0WaUabXpl26zWXh\nXunLH+kVl4JrBt3j+YBSKgH1OWQ0VZlHbcc9UDjVEZVEKbBt/BR3CdfvT/jtbvXn\nOOckS8k+l+RX02zjL3csbhGDTG5qySA4uNx3AoGBANNi/QSolGuc4qXYRS5nI5F3\n7np3NtVbDHW2PPn6+bBvP1gO7PbcYyASDUGiBT+sQGHw5hkdizfSv2aG80Po95KM\nW5jUZ3Idwc8rYP1U2MBNsG7NgihhstobDQSTX8tLPA0Bd85v7hTvk4vjG9bvVzuw\nsQMgxLHZmWQv1YhUkcXA\n-----END PRIVATE KEY-----\n',
-
-		client_email: process.env.FIREBASE_CLIENT_EMAIL,
-		client_id: process.env.FIREBASE_CLIENT_ID,
-		auth_uri: process.env.FIREBASE_AUTH_URL,
-		token_uri: process.env.FIREBASE_TOKEN_URL,
-		auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER,
-		client_x509_cert_url: process.env.FIREBASE_CLIENT,
-		universe_domain: process.env.FIREBASE_UNIVERSE_DOMAIN
+			'-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDbPjp8XhHb1mKi\no8go0WT++leDFpAD0MjArfx6FWVDlYOLHQ978kaDuArDLKrjXmuyTbXyOsB+5seP\nfYRvo7pcvkxs62LoM4BrhbSz0h8FzJnrdd+rE3ubCB6+zZdtfdtDNMuHe58P2ZuR\nV8WmrXhKV862j5IhPcgMZjPHM2IFyuv6gUnCYA4EV6nn0dR39Nz+SUiGLUVkcTEG\nXuOlpdXfpBnRrggCcnNxFB9TgojxND6MrHNki0aZOhQehJ9mAHkHrAljQrp82RtG\noHINlCjfn00Hji1YAfaNj/IJ9qw2ep8lDU5UpQSG8ier+1au0+EKvkDm2hWGtHt/\nvFovR35fAgMBAAECggEACxtZ18J/C1D1YHTr2nmFMTYNTrRLA0Gr/rexvAOVqwW9\nJMQjn5PBOih0NYZvrKLnazogA6kxs4KAgKBX7PBX+Oo6sYsZNyQIypAUll/vBDQY\nMume6Hbm6UGd9FLMOMoXKUGLwA2lglmNVbpWTO13BxkjFtrEiRxgPcfEGFoRI+bk\nUIJUcLJNwySE+ShaJPRfV+53ieHShvRzz4vvtyxLQgEUS/lHrqt4sDoWB9UcuU1P\n0Fbg8FF4RPegB8rfVyvLwpnk+cSzEFZYPOJcqgjzfeah5znHGgfmB0F0FlAC6szV\n3p//srJHPv/f0mslIbbImgl7sxh12lvKRmb0kJGi5QKBgQDu28UP4myrfISS8F0Q\nrthxC0P+uoNJtC+l91PsGWUxsAu+QckXZrOtkULTY9FI+dVOOUqcQ2Fyw5xNlzJj\n789mUKYxmr9z1b2Juvy0qMAodX3fb09HGY7AsANLnth5nnkOLya9oBXAeOurUkF+\nzHFoSnSxnF5e5p/hKzFYRx3dNQKBgQDq+hdMzWVGFxrELffaTNCOn6UfsxXoaeno\nM/kYwbmQgjIxJk6WGueKy7PaY27daH2QaNNzPxxZrCA9PWRDzRxQULLk2Q/Kq8eY\nHNiJ0VyL+P2sdmm6zzWDZDV8a92yMh8rbC0Xqh0TfMN4nn3ht+/CfHFd5f5zZSEp\nLXiS7RrjwwKBgQDEgu7HuMMq+tCfiz0l4pOTvW79fTlSQ/oHk0nqLqKAlJO0va7R\nn98nZyERhUfDwDdrmdr2YMEliCVp+ICuk7eQN73jhasJg8niLIKHp2YgYzlhv9P7\nbN1zTdwINPFobaaussAutivvJAzP8GaOCWksIkWLclh5v0e+GqkINcouGQKBgGdB\nlQGT9J/zQTjaNmNAhBlYgBhI+ySRfk8in6DIaIHfJK1CdyAxHHR6hUM/lJVI+HyA\nBANNxWiGYfhnROsidAG7JJG57N2T1Pa8Hk+Zp8B+nwKtWlLUAWEGpRZS1C4dJmNP\nexU+FN7eYYtcolaRHJPrWWn4ynLtCsBskeKGvN0/AoGBAKGx08NkHWUzNVD8e5jm\nuSVvN5pJgTuyfFAHJ3ouJkDbf6a2Vmq4PwYSPO1/7BFfS4+H833QXfnIeQm2/RJN\n7qP75oQ2VFj+bhS3YUoO9S+bUZbc/oJP9MywKFaVXCJaO0qPWgGxUSwL3K3ImiXb\nIkcygkNzdncMum/GDDHSzTwG\n-----END PRIVATE KEY-----\n',
+		client_email:
+			'firebase-adminsdk-6dr6v@chromium-d89a6.iam.gserviceaccount.com',
+		client_id: '104854598325804175622',
+		auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+		token_uri: 'https://oauth2.googleapis.com/token',
+		auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+		client_x509_cert_url:
+			'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6dr6v%40chromium-d89a6.iam.gserviceaccount.com',
+		universe_domain: 'googleapis.com'
 	}),
 	storageBucket: 'chromium-d89a6.appspot.com'
 })
