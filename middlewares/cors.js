@@ -1,6 +1,7 @@
 const allowedCors = [
 	'http://chromium-d89a6.web.app',
 	'https://chromium-d89a6.web.app',
+	'https://instagram-copy-app.ru',
 	'http://localhost:9000',
 	'http://localhost:9200'
 ]

@@ -1,1 +1,3 @@
-# instagram-app-copy-backend
+# Instagram Copy App
+
+instagram-copy-app.ru
