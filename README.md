@@ -8,7 +8,7 @@ Instagram Copy App — это копия популярной социально
 ![Firestore](https://img.shields.io/badge/Firestore-172F45?style=for-the-badge&logo=firebase)
 ![EXPRESS.JS](https://img.shields.io/badge/Express-172F45?style=for-the-badge&logo=express)
 
-### Возможности
+### Возможности API:
 
 - Получение постов пользователя из базы данных Cloud Firestore
 - Создание и запись поста в БД
@@ -20,7 +20,7 @@ Instagram Copy App — это копия популярной социально
 
 👉 API для тестирования доступно по адресу - [https://instagram-app-copy-backend.vercel.app](https://instagram-app-copy-backend.vercel.app)
 
-❗️❗️❗️ Для работы с этим API есть frontend проект - [movies-explorer-frontend](https://github.com/kirillzhakin/Instagram-app-copy)
+❗️❗️❗️ Для работы с этим API есть frontend проект - [instagram-copy-app](https://github.com/kirillzhakin/Instagram-app-copy)
 
 ### Инструкция по запуску (Быстрый старт)
 
@@ -35,7 +35,7 @@ cd <Имя-папки>
 2. Склонируйте этот репозиторий:
 
 ```
-git clone https://github.com/kirillzhakin/instagram-app-copy-backend.git
+git clone https://github.com/kirillzhakin/Instagram-app-copy.git
 ```
 
 3. Установите зависимости:
@@ -62,6 +62,6 @@ npm run start
 
 ## Ссылки
 
-Репозиторий: [GitHub](https://github.com/kirillzhakin/instagram-app-copy-backend.git)
+Репозиторий: https://github.com/kirillzhakin/instagram-app-copy-backend.git
 
 Сайт: https://instagram-copy-app.ru
