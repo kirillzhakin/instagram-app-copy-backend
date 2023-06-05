@@ -1,6 +1,6 @@
 # Instagram Copy App (backend)
 
-Instagram Copy App — это копия популярной социальной сети Instagram. Серверная часть приложения.
+[Instagram Copy App](https://instagram-copy-app.ru) — это копия популярной социальной сети Instagram. Серверная часть приложения.
 
 ### Использованные технологии
 
