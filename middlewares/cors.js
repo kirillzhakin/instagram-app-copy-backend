@@ -1,4 +1,6 @@
 const allowedCors = [
+	'https://instagram-app-copy.vercel.app',
+	'http://instagram-app-copy.vercel.app',
 	'http://chromium-d89a6.web.app',
 	'https://chromium-d89a6.web.app',
 	'https://instagram-copy-app.ru',
