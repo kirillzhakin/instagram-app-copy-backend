@@ -1,6 +1,6 @@
 # Instagram Copy App (backend)
 
-[Instagram Copy App](https://instagram-copy-app.ru) — это копия популярной социальной сети Instagram. Серверная часть приложения.
+[Instagram Copy App](https://instagram-app-copy.vercel.app) — это копия популярной социальной сети Instagram. Серверная часть приложения.
 
 ### Использованные технологии
 
@@ -64,4 +64,4 @@ npm run start
 
 Репозиторий: https://github.com/kirillzhakin/instagram-app-copy-backend.git
 
-Сайт: https://instagram-copy-app.ru
+Сайт: https://instagram-app-copy.vercel.app
